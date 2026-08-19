@@ -1,10 +1,155 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ceac8d6946b1125fe782cd171fbcb245b567dbf9"
+    },
+    "com.kybernetik.animancer": {
+      "version": "file:com.kybernetik.animancer",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.modules.animation": "1.0.0"
+      }
+    },
+    "com.raxy.animation": {
+      "version": "https://github.com/RobyRAX/RAXY-Animation.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+        "com.raxy.core": "1.0.0",
+        "com.raxy.utility": "1.0.0",
+        "com.unity.addressables": "3.1.0"
+      },
+      "hash": "271ac385196e932b60f46e54d18a7f73d2429958"
+    },
+    "com.raxy.core": {
+      "version": "https://github.com/RobyRAX/RAXY-Core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+        "com.raxy.utility": "1.0.0",
+        "com.unity.addressables": "3.1.0"
+      },
+      "hash": "e72e74ff47fc25f35517259745375a75b6ba0782"
+    },
+    "com.raxy.event": {
+      "version": "https://github.com/RobyRAX/RAXY-Event.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4c78be43640757f94648f3a7f7b73b66a0801ecd"
+    },
+    "com.raxy.inputsystem": {
+      "version": "https://github.com/RobyRAX/RAXY-InputSystem.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.raxy.event": "1.0.0",
+        "com.raxy.utility": "1.0.0",
+        "com.unity.inputsystem": "1.19.0"
+      },
+      "hash": "40f957a502de9e1b06ec570c72ec754c4ea695eb"
+    },
+    "com.raxy.interaction": {
+      "version": "https://github.com/RobyRAX/RAXY-Interaction.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "20fd6ceeed0715f9bf6abc5c47e0427b2eb9d1ad"
+    },
+    "com.raxy.movement": {
+      "version": "https://github.com/RobyRAX/RAXY-Movement.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.raxy.utility": "1.0.0",
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+      },
+      "hash": "2ba31f1a25d9dc27f24c3ddb6d1ee662a45f89f3"
+    },
+    "com.raxy.package-installer": {
+      "version": "https://github.com/RobyRAX/RAXY-Package-Installer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ff9a9b7dbbdcbaeb766624253cda5369f82cb914"
+    },
+    "com.raxy.quest2": {
+      "version": "https://github.com/RobyRAX/RAXY-Quest-V2.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.raxy.event": "1.0.0",
+        "com.raxy.utility.localization": "1.0.0",
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+      },
+      "hash": "30eb1985ab7bd09c78c52e432351f57df13f1446"
+    },
+    "com.raxy.statemachine": {
+      "version": "https://github.com/RobyRAX/RAXY-StateMachine.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+      },
+      "hash": "40ab4b4678eb12ad47b8e18e38512e938506d473"
+    },
+    "com.raxy.ui": {
+      "version": "https://github.com/RobyRAX/RAXY-UI.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      },
+      "hash": "db635a6f67d94d4baeaeaec20cf1623c7b789d93"
+    },
+    "com.raxy.utility": {
+      "version": "https://github.com/RobyRAX/RAXY-Utility.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.2"
+      },
+      "hash": "668c76430b1506bbc1704b48f8a19763337f0afe"
+    },
+    "com.raxy.utility.localization": {
+      "version": "https://github.com/RobyRAX/RAXY-Localization.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+        "com.unity.addressables": "3.1.0",
+        "com.unity.localization": "1.5.12"
+      },
+      "hash": "1cb285a2b1082331500321a1aa8b7d4db9aac0c6"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 1,
       "source": "builtin",
       "dependencies": {}
+    },
+    "com.unity.addressables": {
+      "version": "3.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.profiling.core": "1.0.2",
+        "com.unity.test-framework": "1.4.5",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.scriptablebuildpipeline": "3.1.1",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.ai.assistant": {
       "version": "2.18.0-pre.2",
@@ -90,6 +235,17 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.film-internal-utilities": {
+      "version": "0.20.0-preview",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.2.18",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ide.rider": {
       "version": "3.0.39",
       "depth": 0,
@@ -117,6 +273,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.localization": {
+      "version": "1.5.12",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.addressables": "1.25.0",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.mathematics": {
       "version": "1.3.3",
       "depth": 1,
@@ -141,6 +307,25 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.probuilder": {
+      "version": "6.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "17.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.profiling.core": {
+      "version": "1.0.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -178,9 +363,26 @@
         "com.unity.render-pipelines.core": "17.0.3"
       }
     },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "3.1.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.4.5",
+        "com.unity.modules.assetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.searcher": {
       "version": "4.9.4",
       "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.settings-manager": {
+      "version": "2.1.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -223,6 +425,16 @@
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.toonshader": {
+      "version": "0.15.0-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.0.3",
+        "com.unity.film-internal-utilities": "0.20.0-preview"
       },
       "url": "https://packages.unity.com"
     },
