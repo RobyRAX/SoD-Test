@@ -95,6 +95,5 @@ AssetOrigin:
   productId: 204568
   packageName: 'Character Pack: Free Animal People Sample'
   packageVersion: 2.0.0
-  assetPath: Assets/Supercyan Character Pack Animal People Sample/Textures/Supercyan
-    Sample/animal_people_wolf_texture_head.png
+  assetPath: Assets/_Roby/_Content_0.0.0/Character/Hero/Shameel/Material/Texture/animal_people_wolf_texture_head.png
   uploadId: 691359
