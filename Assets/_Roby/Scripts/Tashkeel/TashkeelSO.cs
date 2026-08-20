@@ -51,6 +51,14 @@ public class AttackAction
     [TitleGroup("Timestamps")]
     [SuffixLabel("seconds")]
     public float resetAttackSetTime;
+
+    [TitleGroup("Dash")]
+    public bool dashToEnemy = true;
+
+    [TitleGroup("Dash")]
+    [ShowIf("@dashToEnemy")]
+    [SuffixLabel("meters")]
+    public float distanceToDash = 4f;
 }
 
 [Serializable]

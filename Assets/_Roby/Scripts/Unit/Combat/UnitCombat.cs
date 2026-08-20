@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Animancer;
 using RAXY.Animation;
@@ -14,6 +15,10 @@ public enum AttackPhase
 
 public class UnitCombat : MonoBehaviour
 {
+    public const float MinDashStopDistance = 2f;
+    public const float DashSpeed = 15f;
+    public const float DashDuration = 0.1f;
+
     [SerializeField]
     TashkeelSO tashkeel;
 
@@ -57,13 +62,19 @@ public class UnitCombat : MonoBehaviour
     [ReadOnly]
     Collider _currentTarget;
 
+    [ShowInInspector]
+    [ReadOnly]
+    bool _isAttackDashing;
+
     UnitControllerBase _cont;
     UnitAttackEventSequencer _eventSequencer;
     AttackAction _currentAction;
     Collider[] _nearbyBuffer;
     int _nearbyCount;
+    Coroutine _dashCoroutine;
 
     public bool IsAttacking => _isAttacking;
+    public bool IsAttackDashing => _isAttackDashing;
     public AttackPhase AttackPhase => _attackPhase;
     public TashkeelSO Tashkeel => tashkeel;
     public Collider CurrentTarget => _currentTarget;
@@ -145,6 +156,7 @@ public class UnitCombat : MonoBehaviour
         _forceStartFromZero = false;
         _attackPhase = AttackPhase.Active;
 
+        StopAttackDash();
         _eventSequencer?.StopAllSequence();
 
         float maxTime = ResolveAnimationLength(action);
@@ -175,6 +187,70 @@ public class UnitCombat : MonoBehaviour
             _cont?.MovementCont?.LookAt(target.bounds.center, instant: true);
         else if (move.sqrMagnitude > 0.001f)
             _cont?.MovementCont?.LookAtInput(move, instant: true);
+
+        TryStartDashToTarget();
+    }
+
+    void TryStartDashToTarget()
+    {
+        StopAttackDash();
+
+        if (_currentAction == null || !_currentAction.dashToEnemy)
+            return;
+
+        if (_currentTarget == null)
+            return;
+
+        float distance = Vector3.Distance(transform.position, _currentTarget.bounds.center);
+        if (distance > _currentAction.distanceToDash)
+            return;
+
+        _dashCoroutine = StartCoroutine(DashToTargetCo(_currentTarget));
+    }
+
+    IEnumerator DashToTargetCo(Collider target)
+    {
+        _isAttackDashing = true;
+        float elapsed = 0f;
+
+        while (elapsed < DashDuration)
+        {
+            if (target == null)
+            {
+                _cont?.MovementCont?.Set_HorizontalVelocity(Vector3.zero);
+                break;
+            }
+
+            _cont?.MovementCont?.LookAt(target.bounds.center);
+
+            float distance = Vector3.Distance(transform.position, target.bounds.center);
+            if (distance > MinDashStopDistance)
+                _cont?.MovementCont?.Set_HorizontalVelocity(DashSpeed * transform.forward);
+            else
+                _cont?.MovementCont?.Set_HorizontalVelocity(Vector3.zero);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _cont?.MovementCont?.Set_HorizontalVelocity(Vector3.zero);
+        _isAttackDashing = false;
+        _dashCoroutine = null;
+    }
+
+    void StopAttackDash()
+    {
+        if (_dashCoroutine != null)
+        {
+            StopCoroutine(_dashCoroutine);
+            _dashCoroutine = null;
+        }
+
+        if (_isAttackDashing)
+        {
+            _cont?.MovementCont?.Set_HorizontalVelocity(Vector3.zero);
+            _isAttackDashing = false;
+        }
     }
 
     public Collider DecideAttackTarget()
@@ -202,12 +278,29 @@ public class UnitCombat : MonoBehaviour
             : transform.forward;
 
         bool stickyValid = IsColliderInResults(_currentTarget);
+        bool isFirstAttack = _currentIndex <= 0;
 
         Collider chosen;
-        if (!stickyValid || !hasMove)
+        if (!stickyValid)
+        {
+            // No usable sticky — always pick nearest.
             chosen = GetNearestTarget(origin);
-        else
+        }
+        else if (!isFirstAttack && !hasMove)
+        {
+            // Mid-combo without stick: never retarget.
+            chosen = _currentTarget;
+        }
+        else if (hasMove)
+        {
+            // Stick held: allow angle-based switch (first or later).
             chosen = GetTargetByAngle(origin, aimDir, _currentTarget);
+        }
+        else
+        {
+            // First attack, no stick: nearest.
+            chosen = GetNearestTarget(origin);
+        }
 
         _currentTarget = chosen;
         return _currentTarget;
@@ -373,6 +466,7 @@ public class UnitCombat : MonoBehaviour
 
     public void OnAttackStateExit()
     {
+        StopAttackDash();
         _eventSequencer?.StopAllSequence();
         ResetAttackFlags();
     }
@@ -404,6 +498,7 @@ public class UnitCombat : MonoBehaviour
 
     void FinishAttack()
     {
+        StopAttackDash();
         _eventSequencer?.StopAllSequence();
         ResetAttackFlags();
 

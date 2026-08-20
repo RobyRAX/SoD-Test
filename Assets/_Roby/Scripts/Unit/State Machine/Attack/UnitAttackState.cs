@@ -45,6 +45,9 @@ public class UnitAttackState : UnitStateBase
         if (_combat != null && _combat.AttackPhase == AttackPhase.IdleTransition)
             return;
 
+        if (_combat != null && _combat.IsAttackDashing)
+            return;
+
         _movementCont?.Set_HorizontalVelocity(Vector3.zero);
     }
 }

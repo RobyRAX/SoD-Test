@@ -71,6 +71,8 @@ MonoBehaviour:
     allowTransitionTime: 0.6
     endTime: 0.9166667
     resetAttackSetTime: 1.1666666
+    dashToEnemy: 1
+    distanceToDash: 3
   - attackId: staff_atk_1
     animation:
       useAddressable: 0
@@ -93,6 +95,8 @@ MonoBehaviour:
     allowTransitionTime: 0.75
     endTime: 1
     resetAttackSetTime: 1.25
+    dashToEnemy: 1
+    distanceToDash: 3
   - attackId: staff_atk_2
     animation:
       useAddressable: 0
@@ -115,3 +119,5 @@ MonoBehaviour:
     allowTransitionTime: 1.25
     endTime: 1.25
     resetAttackSetTime: 1.25
+    dashToEnemy: 1
+    distanceToDash: 3
