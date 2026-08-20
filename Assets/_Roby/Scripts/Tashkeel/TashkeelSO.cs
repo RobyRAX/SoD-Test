@@ -33,5 +33,42 @@ public enum TashkeelActionType
 [Serializable]
 public class AttackAction
 {
+    public string attackId;
     public AnimationClipSet animation;
-} 
+
+    [TitleGroup("Timestamps")]
+    [HideLabel]
+    public AttackTimeEntrySet timeEntries;
+
+    [TitleGroup("Timestamps")]
+    [SuffixLabel("seconds")]
+    public float allowTransitionTime;
+}
+
+[Serializable]
+public class AttackTimeEntrySet
+{
+    [ListDrawerSettings(ShowIndexLabels = true, Expanded = true)]
+    public List<HitTimeEntry> hitEntries = new();
+
+    [ListDrawerSettings(ShowIndexLabels = true, Expanded = true)]
+    public List<VfxTimeEntry> vfxEntries = new();
+}
+
+[Serializable]
+public class HitTimeEntry
+{
+    [SuffixLabel("seconds")]
+    public float time;
+
+    public int hitIndex;
+}
+
+[Serializable]
+public class VfxTimeEntry
+{
+    [SuffixLabel("seconds")]
+    public float time;
+
+    public string vfxId;
+}

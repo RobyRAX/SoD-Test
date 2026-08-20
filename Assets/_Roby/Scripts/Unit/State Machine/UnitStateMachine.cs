@@ -26,6 +26,7 @@ public class UnitStateMachine : StateMachine
     public UnitLandState Land { get; set; }
     public UnitDodgeForwardState DodgeForward { get; set; }
     public UnitDodgeBackwardState DodgeBackward { get; set; }
+    public UnitAttackState Attack { get; set; }
 
     public UnitStateMachine(UnitControllerBase ownerCont) : base()
     {
@@ -55,8 +56,17 @@ public class UnitStateMachine : StateMachine
         Land = new UnitLandState(this);
         DodgeForward = new UnitDodgeForwardState(this);
         DodgeBackward = new UnitDodgeBackwardState(this);
+        Attack = new UnitAttackState(this);
 
         ChangeState(Idle);
+    }
+
+    public void ChangeAttackState()
+    {
+        if (CurrentState == Attack)
+            return;
+
+        ChangeState(Attack);
     }
 
     public void ChangeFallState(bool playFallOnEnter, float animationEnterDelay)

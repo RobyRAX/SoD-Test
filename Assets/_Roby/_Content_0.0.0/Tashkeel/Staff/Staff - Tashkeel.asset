@@ -13,4 +13,99 @@ MonoBehaviour:
   m_Name: Staff - Tashkeel
   m_EditorClassIdentifier: Assembly-CSharp::TashkeelSO
   tashkeelId: staff
-  tashkeelPrefab: {fileID: 0}
+  tashkeelPrefab: {fileID: 8460799610067300966, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
+  idle:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  walk:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  run:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  actionType: 1
+  attackActions:
+  - attackId: staff_atk_0
+    animation:
+      useAddressable: 0
+      animationClip: {fileID: 7400000, guid: af338c1078ee8cf46b75a5a81e3a18a8, type: 2}
+      animationClipRef:
+        m_AssetGUID: 
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+      speed: 1
+      showAeTool: 0
+    timeEntries:
+      hitEntries:
+      - time: 0.25
+        hitIndex: 0
+      vfxEntries:
+      - time: 0.2
+        vfxId: staff_atk_0_vfx
+    allowTransitionTime: 0.75
+  - attackId: staff_atk_1
+    animation:
+      useAddressable: 0
+      animationClip: {fileID: 7400000, guid: d66c78f79b6f52546b16a38fda9defd1, type: 2}
+      animationClipRef:
+        m_AssetGUID: 
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+      speed: 1
+      showAeTool: 0
+    timeEntries:
+      hitEntries:
+      - time: 0.27
+        hitIndex: 0
+      vfxEntries:
+      - time: 0.2
+        vfxId: staff_atk_1_vfx
+    allowTransitionTime: 0.75
+  - attackId: staff_atk_2
+    animation:
+      useAddressable: 0
+      animationClip: {fileID: 7400000, guid: b68649dc7afc70141b3b2a40f71fb48c, type: 2}
+      animationClipRef:
+        m_AssetGUID: 
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+      speed: 1
+      showAeTool: 0
+    timeEntries:
+      hitEntries:
+      - time: 0.28
+        hitIndex: 0
+      vfxEntries:
+      - time: 0.2
+        vfxId: 
+    allowTransitionTime: 1.5

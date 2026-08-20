@@ -8,4 +8,5 @@ public class ActiveUnitBrainConfigSO : BrainConfigBaseSO
     public InputActionEventSO walkRunToggleEventSO;
     public InputActionEventSO jumpEventSO;
     public InputActionEventSO dashEventSO;
+    public InputActionEventSO attackEventSO;
 }

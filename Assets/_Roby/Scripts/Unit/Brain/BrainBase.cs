@@ -8,6 +8,7 @@ public abstract class BrainBase
     public event Action<bool> OnWalkRunToggleChange;
     public event Action<bool> OnJumpChange;
     public event Action<bool> OnDashChange;
+    public event Action<bool> OnAttackChange;
 
     public UnitControllerBase Cont { get; }
     public UnitStateMachine UnitSM { get; set; }
@@ -83,6 +84,22 @@ public abstract class BrainBase
         }
     }
 
+    bool _attack;
+    [TitleGroup("Input To Send")]
+    [ShowInInspector]
+    public virtual bool Attack
+    {
+        get => _attack;
+        set
+        {
+            if (_attack == value)
+                return;
+
+            _attack = value;
+            OnAttackChange?.Invoke(_attack);
+        }
+    }
+
     public virtual void Update() { }
     public virtual void OnDestroy() { }
 
@@ -92,5 +109,6 @@ public abstract class BrainBase
         WalkRunToggle = false;
         Jump = false;
         Dash = false;
+        Attack = false;
     }
 }

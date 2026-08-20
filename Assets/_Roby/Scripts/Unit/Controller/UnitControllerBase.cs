@@ -10,6 +10,7 @@ public abstract class UnitControllerBase : MonoBehaviour
 
     public UnitMovement MovementCont { get; set; }
     public AnimancerController AnimancerCont { get; set; }
+    public UnitCombat CombatCont { get; set; }
 
     [ShowInInspector]
     [HideReferenceObjectPicker]
@@ -49,6 +50,7 @@ public abstract class UnitControllerBase : MonoBehaviour
     {
         MovementCont = GetComponent<UnitMovement>();
         AnimancerCont = GetComponent<AnimancerController>();
+        CombatCont = GetComponent<UnitCombat>();
         UnitStateMachine = new UnitStateMachine(this);
     }
 
@@ -95,6 +97,9 @@ public abstract class UnitControllerBase : MonoBehaviour
 
         Brain.OnDashChange -= DashChangedHandler;
         Brain.OnDashChange += DashChangedHandler;
+
+        Brain.OnAttackChange -= AttackChangedHandler;
+        Brain.OnAttackChange += AttackChangedHandler;
     }
 
     protected virtual void UnsubscribeBrainEvents()
@@ -105,6 +110,7 @@ public abstract class UnitControllerBase : MonoBehaviour
         Brain.OnWalkRunToggleChange -= WalkRunChangedHandler;
         Brain.OnJumpChange -= JumpChangedHandler;
         Brain.OnDashChange -= DashChangedHandler;
+        Brain.OnAttackChange -= AttackChangedHandler;
     }
 
     protected virtual void Update()
@@ -156,5 +162,11 @@ public abstract class UnitControllerBase : MonoBehaviour
     {
         if (isPressed)
             MovementCont?.TryCommenceDodge();
+    }
+
+    void AttackChangedHandler(bool isPressed)
+    {
+        if (isPressed)
+            CombatCont?.TryCommenceAttack();
     }
 }

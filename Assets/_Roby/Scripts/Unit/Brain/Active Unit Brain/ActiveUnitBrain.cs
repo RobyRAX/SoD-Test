@@ -42,6 +42,9 @@ public class ActiveUnitBrain : BrainBase
 
         if (Config.dashEventSO != null)
             Config.dashEventSO.Subscribe(DashChangeHandler);
+
+        if (Config.attackEventSO != null)
+            Config.attackEventSO.Subscribe(AttackChangeHandler);
     }
 
     public void UnsubscribeToEventSO()
@@ -60,6 +63,9 @@ public class ActiveUnitBrain : BrainBase
 
         if (Config.dashEventSO != null)
             Config.dashEventSO.Unsubscribe(DashChangeHandler);
+
+        if (Config.attackEventSO != null)
+            Config.attackEventSO.Unsubscribe(AttackChangeHandler);
     }
 
     public override Vector2 Move
@@ -107,5 +113,10 @@ public class ActiveUnitBrain : BrainBase
     void DashChangeHandler(InputContext ctx)
     {
         Dash = ctx.BoolValue;
+    }
+
+    void AttackChangeHandler(InputContext ctx)
+    {
+        Attack = ctx.BoolValue;
     }
 }
