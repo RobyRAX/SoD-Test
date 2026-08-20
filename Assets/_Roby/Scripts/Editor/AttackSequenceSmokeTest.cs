@@ -29,7 +29,9 @@ public static class AttackSequenceSmokeTest
                 ? action.animation.AnimationClip.length
                 : 1f;
             var seq = AttackEventSequenceBuilder.Build(action, len);
-            Debug.Log($"[SmokeTest] [{i}] {action.attackId} len={len:F2} events={seq.eventEntries.Count}");
+            seq.eventEntries.SortByEventTime();
+            Debug.Log($"[SmokeTest] [{i}] {action.attackId} len={len:F2} events={seq.eventEntries.Count} " +
+                      $"allow={action.allowTransitionTime} end={action.endTime} reset={action.resetAttackSetTime}");
             foreach (var e in seq.eventEntries)
                 Debug.Log($"  - {e.eventTag} @ {e.timeEntry.time:F3}s");
         }

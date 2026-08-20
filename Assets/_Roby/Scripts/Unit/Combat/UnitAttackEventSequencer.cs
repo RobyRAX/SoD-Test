@@ -36,6 +36,10 @@ public class UnitAttackEventSequencer : EventSequencer, ISequencedEventListener
             _combat.OnAttackVfx(stringParam);
         else if (entry.eventTag == AttackEventTags.ALLOW_TRANSITION)
             _combat.OnAllowTransition(stringParam);
+        else if (entry.eventTag == AttackEventTags.END)
+            _combat.OnAttackEnd(stringParam);
+        else if (entry.eventTag == AttackEventTags.RESET_ATTACK_SET)
+            _combat.OnResetAttackSet(stringParam);
         else if (entry.eventTag == AttackEventTags.ANIMATION_END)
             _combat.OnAttackAnimationEnd(stringParam);
     }

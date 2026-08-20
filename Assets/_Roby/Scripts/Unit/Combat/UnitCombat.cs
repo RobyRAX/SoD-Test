@@ -5,6 +5,13 @@ using RAXY.EventSequence;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+public enum AttackPhase
+{
+    None,
+    Active,
+    IdleTransition
+}
+
 public class UnitCombat : MonoBehaviour
 {
     [SerializeField]
@@ -26,11 +33,20 @@ public class UnitCombat : MonoBehaviour
     [ReadOnly]
     bool _inputTriggered;
 
+    [ShowInInspector]
+    [ReadOnly]
+    bool _forceStartFromZero;
+
+    [ShowInInspector]
+    [ReadOnly]
+    AttackPhase _attackPhase;
+
     UnitControllerBase _cont;
     UnitAttackEventSequencer _eventSequencer;
     AttackAction _currentAction;
 
     public bool IsAttacking => _isAttacking;
+    public AttackPhase AttackPhase => _attackPhase;
     public TashkeelSO Tashkeel => tashkeel;
 
     void Awake()
@@ -64,6 +80,14 @@ public class UnitCombat : MonoBehaviour
                 return;
             }
 
+            if (_forceStartFromZero)
+            {
+                _forceStartFromZero = false;
+                _currentIndex = 0;
+                ExecuteAttack(tashkeel.attackActions[0]);
+                return;
+            }
+
             if (_currentIndex + 1 >= tashkeel.attackActions.Count)
             {
                 _inputTriggered = true;
@@ -76,6 +100,7 @@ public class UnitCombat : MonoBehaviour
         }
 
         _currentIndex = 0;
+        _forceStartFromZero = false;
         ExecuteAttack(tashkeel.attackActions[_currentIndex]);
     }
 
@@ -90,6 +115,8 @@ public class UnitCombat : MonoBehaviour
         _isAttacking = true;
         _allowExecute = false;
         _inputTriggered = false;
+        _forceStartFromZero = false;
+        _attackPhase = AttackPhase.Active;
 
         _eventSequencer?.StopAllSequence();
 
@@ -98,7 +125,7 @@ public class UnitCombat : MonoBehaviour
         {
             _cont.AnimancerCont.PlayAnimation(
                 action.animation,
-                0.05f,
+                0.1f,
                 AnimancerController.MAIN_LAYER,
                 FadeMode.FromStart);
         }
@@ -139,9 +166,30 @@ public class UnitCombat : MonoBehaviour
             TryContinueBufferedAttack();
     }
 
+    public void OnAttackEnd(string attackId)
+    {
+        Debug.Log($"[Attack] End: {attackId}", this);
+        _attackPhase = AttackPhase.IdleTransition;
+        _allowExecute = true;
+    }
+
+    public void OnResetAttackSet(string attackId)
+    {
+        Debug.Log($"[Attack] ResetAttackSet: {attackId}", this);
+        _currentIndex = 0;
+        _inputTriggered = false;
+        _forceStartFromZero = true;
+    }
+
     public void OnAttackAnimationEnd(string attackId)
     {
         Debug.Log($"[Attack] AnimationEnd: {attackId}", this);
+
+        if (_forceStartFromZero)
+        {
+            FinishAttack();
+            return;
+        }
 
         if (_inputTriggered && CanContinueToNext())
         {
@@ -156,9 +204,11 @@ public class UnitCombat : MonoBehaviour
     {
         _allowExecute = false;
         _inputTriggered = false;
+        _forceStartFromZero = false;
         _isAttacking = false;
         _currentAction = null;
         _currentIndex = 0;
+        _attackPhase = AttackPhase.None;
     }
 
     public void OnAttackStateExit()
@@ -169,6 +219,12 @@ public class UnitCombat : MonoBehaviour
 
     void TryContinueBufferedAttack()
     {
+        if (_forceStartFromZero)
+        {
+            _inputTriggered = false;
+            return;
+        }
+
         if (!CanContinueToNext())
         {
             _inputTriggered = false;
@@ -221,6 +277,8 @@ public static class AttackEventTags
     public const string LAST_HIT = "LastHit";
     public const string VFX = "Vfx";
     public const string ALLOW_TRANSITION = "AllowTransition";
+    public const string END = "End";
+    public const string RESET_ATTACK_SET = "ResetAttackSet";
     public const string ANIMATION_END = "AnimationEnd";
 }
 
@@ -234,11 +292,9 @@ public static class AttackEventSequenceBuilder
         entries.Add(CreateEvent(AttackEventTags.START, 0f, attackId));
         entries.Add(CreateEvent(AttackEventTags.ANIMATION_END, maxTime, attackId));
 
-        if (action.allowTransitionTime > 0f)
-        {
-            float allowTime = Mathf.Clamp(action.allowTransitionTime, 0f, Mathf.Max(0f, maxTime - 0.01f));
-            entries.Add(CreateEvent(AttackEventTags.ALLOW_TRANSITION, allowTime, attackId));
-        }
+        AddTimedEvent(entries, AttackEventTags.ALLOW_TRANSITION, action.allowTransitionTime, attackId, maxTime);
+        AddTimedEvent(entries, AttackEventTags.END, action.endTime, attackId, maxTime);
+        AddTimedEvent(entries, AttackEventTags.RESET_ATTACK_SET, action.resetAttackSetTime, attackId, maxTime);
 
         var hits = action.timeEntries?.hitEntries;
         if (hits != null)
@@ -286,6 +342,15 @@ public static class AttackEventSequenceBuilder
             sequenceId = attackId,
             eventEntries = entries
         };
+    }
+
+    static void AddTimedEvent(List<EventEntry> entries, string tag, float time, string attackId, float maxTime)
+    {
+        if (time <= 0f)
+            return;
+
+        float clamped = Mathf.Clamp(time, 0f, maxTime);
+        entries.Add(CreateEvent(tag, clamped, attackId));
     }
 
     static EventEntry CreateEvent(string tag, float time, string attackId)

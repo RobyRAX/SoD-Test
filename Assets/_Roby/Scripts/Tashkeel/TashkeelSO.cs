@@ -43,6 +43,14 @@ public class AttackAction
     [TitleGroup("Timestamps")]
     [SuffixLabel("seconds")]
     public float allowTransitionTime;
+
+    [TitleGroup("Timestamps")]
+    [SuffixLabel("seconds")]
+    public float endTime;
+
+    [TitleGroup("Timestamps")]
+    [SuffixLabel("seconds")]
+    public float resetAttackSetTime;
 }
 
 [Serializable]
