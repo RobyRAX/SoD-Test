@@ -17,6 +17,18 @@ public class UnitCombat : MonoBehaviour
     [SerializeField]
     TashkeelSO tashkeel;
 
+    [TitleGroup("Target Detection")]
+    [SerializeField]
+    LayerMask enemyLayer;
+
+    [TitleGroup("Target Detection")]
+    [SerializeField]
+    float targetDetectRadius = 8f;
+
+    [TitleGroup("Target Detection")]
+    [SerializeField]
+    int nearbyBufferSize = 8;
+
     [ShowInInspector]
     [ReadOnly]
     int _currentIndex;
@@ -41,23 +53,38 @@ public class UnitCombat : MonoBehaviour
     [ReadOnly]
     AttackPhase _attackPhase;
 
+    [ShowInInspector]
+    [ReadOnly]
+    Collider _currentTarget;
+
     UnitControllerBase _cont;
     UnitAttackEventSequencer _eventSequencer;
     AttackAction _currentAction;
+    Collider[] _nearbyBuffer;
+    int _nearbyCount;
 
     public bool IsAttacking => _isAttacking;
     public AttackPhase AttackPhase => _attackPhase;
     public TashkeelSO Tashkeel => tashkeel;
+    public Collider CurrentTarget => _currentTarget;
 
     void Awake()
     {
         CacheRefs();
+        EnsureNearbyBuffer();
     }
 
     public void CacheRefs()
     {
         _cont = GetComponent<UnitControllerBase>();
         _eventSequencer = GetComponent<UnitAttackEventSequencer>();
+    }
+
+    void EnsureNearbyBuffer()
+    {
+        int size = Mathf.Max(1, nearbyBufferSize);
+        if (_nearbyBuffer == null || _nearbyBuffer.Length != size)
+            _nearbyBuffer = new Collider[size];
     }
 
     [Button("Debug / Commence Attack")]
@@ -140,6 +167,139 @@ public class UnitCombat : MonoBehaviour
     public void OnAttackStart(string attackId)
     {
         Debug.Log($"[Attack] Start: {attackId}", this);
+
+        var target = DecideAttackTarget();
+        var move = _cont?.Brain?.Move ?? Vector2.zero;
+
+        if (target != null)
+            _cont?.MovementCont?.LookAt(target.bounds.center, instant: true);
+        else if (move.sqrMagnitude > 0.001f)
+            _cont?.MovementCont?.LookAtInput(move, instant: true);
+    }
+
+    public Collider DecideAttackTarget()
+    {
+        EnsureNearbyBuffer();
+        CacheRefs();
+
+        Vector3 origin = transform.position;
+        _nearbyCount = Physics.OverlapSphereNonAlloc(
+            origin,
+            targetDetectRadius,
+            _nearbyBuffer,
+            enemyLayer);
+
+        if (_nearbyCount <= 0)
+        {
+            _currentTarget = null;
+            return null;
+        }
+
+        Vector2 move = _cont?.Brain?.Move ?? Vector2.zero;
+        bool hasMove = move.sqrMagnitude > 0.001f;
+        Vector3 aimDir = hasMove
+            ? new Vector3(move.x, 0f, move.y).normalized
+            : transform.forward;
+
+        bool stickyValid = IsColliderInResults(_currentTarget);
+
+        Collider chosen;
+        if (!stickyValid || !hasMove)
+            chosen = GetNearestTarget(origin);
+        else
+            chosen = GetTargetByAngle(origin, aimDir, _currentTarget);
+
+        _currentTarget = chosen;
+        return _currentTarget;
+    }
+
+    Collider GetNearestTarget(Vector3 origin)
+    {
+        Collider nearest = null;
+        float nearestSqr = float.MaxValue;
+
+        for (int i = 0; i < _nearbyCount; i++)
+        {
+            Collider col = _nearbyBuffer[i];
+            if (col == null)
+                continue;
+
+            float sqr = (origin - col.bounds.center).sqrMagnitude;
+            if (sqr < nearestSqr)
+            {
+                nearestSqr = sqr;
+                nearest = col;
+            }
+        }
+
+        return nearest;
+    }
+
+    Collider GetTargetByAngle(Vector3 origin, Vector3 aimDir, Collider sticky)
+    {
+        Collider bestByAngle = null;
+        float bestAngle = float.MaxValue;
+
+        for (int i = 0; i < _nearbyCount; i++)
+        {
+            Collider col = _nearbyBuffer[i];
+            if (col == null)
+                continue;
+
+            Vector3 toEnemy = col.bounds.center - origin;
+            toEnemy.y = 0f;
+            if (toEnemy.sqrMagnitude < 0.0001f)
+                continue;
+
+            float angle = Vector3.Angle(aimDir, toEnemy);
+            if (angle < bestAngle)
+            {
+                bestAngle = angle;
+                bestByAngle = col;
+            }
+        }
+
+        if (bestByAngle == null)
+            return sticky;
+
+        if (bestByAngle == sticky)
+            return sticky;
+
+        // Alice: if current sticky is already far off aim, force switch.
+        Vector3 toSticky = sticky.bounds.center - origin;
+        toSticky.y = 0f;
+        float stickyAngle = toSticky.sqrMagnitude > 0.0001f
+            ? Vector3.Angle(aimDir, toSticky)
+            : 180f;
+
+        if (stickyAngle > 75f)
+            return bestByAngle;
+
+        // Challenger is behind aim cone — keep sticky.
+        if (bestAngle >= 90f)
+            return sticky;
+
+        // Prefer closer sticky when both are roughly in front.
+        float stickyDist = Vector3.Distance(origin, sticky.bounds.center);
+        float challengerDist = Vector3.Distance(origin, bestByAngle.bounds.center);
+        if (stickyDist < challengerDist)
+            return sticky;
+
+        return bestByAngle;
+    }
+
+    bool IsColliderInResults(Collider target)
+    {
+        if (target == null)
+            return false;
+
+        for (int i = 0; i < _nearbyCount; i++)
+        {
+            if (_nearbyBuffer[i] == target)
+                return true;
+        }
+
+        return false;
     }
 
     public void OnAttackHit(string attackId, int hitIndex)
@@ -268,6 +428,20 @@ public class UnitCombat : MonoBehaviour
 
         return Mathf.Max(0.01f, clip.length);
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1f, 0.35f, 0.2f, 0.35f);
+        Gizmos.DrawWireSphere(transform.position, targetDetectRadius);
+
+        if (_currentTarget != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, _currentTarget.bounds.center);
+        }
+    }
+#endif
 }
 
 public static class AttackEventTags

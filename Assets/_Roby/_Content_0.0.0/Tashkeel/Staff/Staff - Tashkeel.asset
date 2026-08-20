@@ -112,6 +112,6 @@ MonoBehaviour:
       vfxEntries:
       - time: 0.2
         vfxId: 
-    allowTransitionTime: 1.5
-    endTime: 1
-    resetAttackSetTime: 1.5
+    allowTransitionTime: 1.25
+    endTime: 1.25
+    resetAttackSetTime: 1.25
