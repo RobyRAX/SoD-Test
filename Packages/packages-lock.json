@@ -80,6 +80,17 @@
       "dependencies": {},
       "hash": "ff9a9b7dbbdcbaeb766624253cda5369f82cb914"
     },
+    "com.raxy.pooling": {
+      "version": "https://github.com/RobyRAX/RAXY-Pooling.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.raxy.core": "1.0.0",
+        "com.raxy.utility": "1.0.0",
+        "com.unity.addressables": "3.1.0"
+      },
+      "hash": "e7b132d09a0cf0e3cc8b65046deb9126598f68c9"
+    },
     "com.raxy.quest2": {
       "version": "https://github.com/RobyRAX/RAXY-Quest-V2.git",
       "depth": 0,

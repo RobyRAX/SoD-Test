@@ -86,6 +86,9 @@ public class HitEntry
     public float hitStopTimeScale = 0.1f;
     public float hitStopDuration = 0.2f;
     public GameObject hitFxPrefab;
+
+    [SuffixLabel("meters")]
+    public float hitFxSpread = 0.2f;
 }
 
 [Serializable]

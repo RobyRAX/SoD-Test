@@ -54,7 +54,8 @@ MonoBehaviour:
     cameraShakePower: 0
     hitStopTimeScale: 0.1
     hitStopDuration: 0.2
-    hitFxPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+    hitFxPrefab: {fileID: 8272316453960237093, guid: 4c9f3de4801c21441bc28ed46b7d8ed7, type: 3}
+    hitFxSpread: 0.2
   vfxEntries:
   - pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0}
@@ -74,7 +75,7 @@ MonoBehaviour:
       showAeTool: 0
     timeEntries:
       hitEntries:
-      - time: 0.25
+      - time: 0.41666666
         hitIndex: 0
       vfxEntries:
       - time: 0.2
@@ -98,7 +99,7 @@ MonoBehaviour:
       showAeTool: 0
     timeEntries:
       hitEntries:
-      - time: 0.27
+      - time: 0.45
         hitIndex: 0
       vfxEntries:
       - time: 0.2
@@ -122,7 +123,7 @@ MonoBehaviour:
       showAeTool: 0
     timeEntries:
       hitEntries:
-      - time: 0.28
+      - time: 0.6
         hitIndex: 0
       vfxEntries:
       - time: 0.2

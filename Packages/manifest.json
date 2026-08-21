@@ -8,6 +8,7 @@
     "com.raxy.interaction": "https://github.com/RobyRAX/RAXY-Interaction.git",
     "com.raxy.movement": "https://github.com/RobyRAX/RAXY-Movement.git",
     "com.raxy.package-installer": "https://github.com/RobyRAX/RAXY-Package-Installer.git",
+    "com.raxy.pooling": "https://github.com/RobyRAX/RAXY-Pooling.git",
     "com.raxy.quest2": "https://github.com/RobyRAX/RAXY-Quest-V2.git",
     "com.raxy.statemachine": "https://github.com/RobyRAX/RAXY-StateMachine.git",
     "com.raxy.ui": "https://github.com/RobyRAX/RAXY-UI.git",

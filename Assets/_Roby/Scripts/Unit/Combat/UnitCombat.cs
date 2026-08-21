@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Animancer;
 using RAXY.Animation;
 using RAXY.EventSequence;
+using RAXY.Pooling;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -489,7 +490,57 @@ public class UnitCombat : MonoBehaviour
                 if (dir.sqrMagnitude >= 0.0001f)
                     damageable.TakeKnockBack(entry.knockBack, dir);
             }
+
+            SpawnHitFx(entry, col);
         }
+    }
+
+    void SpawnHitFx(HitEntry entry, Collider col)
+    {
+        if (entry == null || entry.hitFxPrefab == null || col == null)
+            return;
+
+        if (!entry.hitFxPrefab.TryGetComponent(out PoolableObject poolPrefab))
+        {
+            Debug.LogWarning($"[{name}] Hit FX prefab '{entry.hitFxPrefab.name}' needs a PoolableObject / PoolableParticleSystem.", this);
+            return;
+        }
+
+        Vector3 victimCenter = col.bounds.center;
+        Vector3 dir = victimCenter - transform.position;
+        dir.y = 0f;
+        if (dir.sqrMagnitude < 0.0001f)
+            dir = transform.forward;
+        else
+            dir.Normalize();
+
+        Vector3 pos = victimCenter - dir * GetHorizontalRadius(col);
+
+        if (entry.hitFxSpread > 0f)
+        {
+            Vector3 right = Vector3.Cross(Vector3.up, dir);
+            if (right.sqrMagnitude < 0.0001f)
+                right = Vector3.right;
+            else
+                right.Normalize();
+
+            Vector2 spread = Random.insideUnitCircle * entry.hitFxSpread;
+            pos += right * spread.x + Vector3.up * spread.y;
+        }
+
+        Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
+        PoolableObject fx = ObjectPoolService.Instance.GetPoolableObject(poolPrefab);
+        if (fx == null)
+            return;
+
+        fx.transform.SetParent(null, true);
+        fx.transform.SetPositionAndRotation(pos, rot);
+    }
+
+    static float GetHorizontalRadius(Collider col)
+    {
+        Bounds bounds = col.bounds;
+        return Mathf.Max(bounds.extents.x, bounds.extents.z);
     }
 
     public void OnAttackVfx(string vfxId)
