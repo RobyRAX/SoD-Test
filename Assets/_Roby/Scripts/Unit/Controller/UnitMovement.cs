@@ -22,7 +22,6 @@ public class UnitMovement : MovementController
     public float doubleJumpHeight = 5f;
     public float airborneSpeedModifier = 7.5f;
     public float forwardDodgeSpeedModifier = 2.75f;
-    public float backDodgeSpeedModifier = 2.75f;
 
     public DashPhase DashPhase;
 

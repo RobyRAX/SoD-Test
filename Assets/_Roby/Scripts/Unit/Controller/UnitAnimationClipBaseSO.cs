@@ -7,7 +7,6 @@ public abstract class UnitAnimationClipsBaseSO : ScriptableObject
     public AnimationClipSet Walk;
     public AnimationClipSet Run;
     public AnimationClipSet DodgeForward;
-    public AnimationClipSet DodgeBackward;
     public AnimationClipSet Jump;
     public AnimationClipSet DoubleJump;
     public AnimationClipSet Fall;

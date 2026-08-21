@@ -775,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a81c66e11476b24a8e4e0cf4420d36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitMovement
-  gravity: -50
+  gravity: -75
   acceleration: 100
   rotationSpeed: 15
   gravityVelocity: {x: 0, y: -2.5, z: 0}
@@ -787,11 +787,10 @@ MonoBehaviour:
   gizmoLineThickness: 3
   walkSpeedModifier: 2
   runSpeedModifier: 5
-  jumpHeight: 2.5
-  doubleJumpHeight: 2
-  airborneSpeedModifier: 4
+  jumpHeight: 5
+  doubleJumpHeight: 5
+  airborneSpeedModifier: 5
   forwardDodgeSpeedModifier: 5.5
-  backDodgeSpeedModifier: 2.5
   DashPhase: 0
 --- !u!114 &376606731
 MonoBehaviour:

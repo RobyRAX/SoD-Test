@@ -56,17 +56,6 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     speed: 1
     showAeTool: 0
-  DodgeBackward:
-    useAddressable: 0
-    animationClip: {fileID: 0}
-    animationClipRef:
-      m_AssetGUID: 
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_SubObjectGUID: 
-      m_EditorAssetChanged: 0
-    speed: 1
-    showAeTool: 0
   Jump:
     useAddressable: 0
     animationClip: {fileID: 7400000, guid: bd364106633419c40ac4e09fe2266586, type: 2}

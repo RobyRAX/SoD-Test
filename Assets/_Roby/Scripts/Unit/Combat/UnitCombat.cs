@@ -181,6 +181,12 @@ public class UnitCombat : MonoBehaviour
     [Button("Debug / Commence Attack")]
     public void TryCommenceAttack()
     {
+        CacheRefs();
+
+        var groundChecker = _cont?.MovementCont?.GroundChecker;
+        if (groundChecker == null || !groundChecker.IsGrounded)
+            return;
+
         if (CombatData == null ||
             CombatData.ActionType != CombatActionType.Attack ||
             CombatData.AttackActions == null ||

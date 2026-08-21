@@ -23,6 +23,7 @@ public class UnitDoubleJumpState : UnitAirborneState
 
         if (SM.AnimancerCont != null && SM.AnimationClips?.DoubleJump != null)
         {
+            SM.AnimancerCont.StopAnimation(SM.AnimationClips.DoubleJump);
             SM.AnimancerCont.PlayAnimation(
                 SM.AnimationClips.DoubleJump,
                 0f,

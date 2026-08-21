@@ -25,7 +25,6 @@ public class UnitStateMachine : StateMachine
     public UnitFallState Fall { get; set; }
     public UnitLandState Land { get; set; }
     public UnitDodgeForwardState DodgeForward { get; set; }
-    public UnitDodgeBackwardState DodgeBackward { get; set; }
     public UnitAttackState Attack { get; set; }
 
     public UnitStateMachine(UnitControllerBase ownerCont) : base()
@@ -55,7 +54,6 @@ public class UnitStateMachine : StateMachine
         Fall = new UnitFallState(this);
         Land = new UnitLandState(this);
         DodgeForward = new UnitDodgeForwardState(this);
-        DodgeBackward = new UnitDodgeBackwardState(this);
         Attack = new UnitAttackState(this);
 
         ChangeState(Idle);
@@ -89,16 +87,6 @@ public class UnitStateMachine : StateMachine
         if (MovementCont != null && MovementCont.DashPhase == DashPhase.Active)
             return;
 
-        if (GroundChecker != null && GroundChecker.IsGrounded)
-        {
-            if (Brain != null && Brain.Move != Vector2.zero)
-                ChangeState(DodgeForward);
-            else
-                ChangeState(DodgeBackward);
-        }
-        else
-        {
-            ChangeState(DodgeForward);
-        }
+        ChangeState(DodgeForward);
     }
 }
