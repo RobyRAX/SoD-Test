@@ -51,9 +51,10 @@ MonoBehaviour:
   hitEntries:
   - damage: 10
     knockBack: 0
-    cameraShakePower: 0
-    hitStopTimeScale: 0.1
-    hitStopDuration: 0.2
+    cameraShakePower: 4
+    cameraShakeDuration: 0.2
+    hitStopTimeScale: 0.05
+    hitStopDuration: 0.1
     hitFxPrefab: {fileID: 8272316453960237093, guid: 4c9f3de4801c21441bc28ed46b7d8ed7, type: 3}
     hitFxSpread: 0.2
   vfxEntries:
@@ -99,6 +100,8 @@ MonoBehaviour:
       showAeTool: 0
     timeEntries:
       hitEntries:
+      - time: 0.25
+        hitIndex: 0
       - time: 0.45
         hitIndex: 0
       vfxEntries:
@@ -123,6 +126,10 @@ MonoBehaviour:
       showAeTool: 0
     timeEntries:
       hitEntries:
+      - time: 0.1
+        hitIndex: 0
+      - time: 0.4
+        hitIndex: 0
       - time: 0.6
         hitIndex: 0
       vfxEntries:

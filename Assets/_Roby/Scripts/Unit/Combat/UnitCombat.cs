@@ -493,6 +493,9 @@ public class UnitCombat : MonoBehaviour
 
             SpawnHitFx(entry, col);
         }
+
+        if (_hitDamageables.Count > 0)
+            AttackFeelManager.Instance?.PlayFeel(entry);
     }
 
     void SpawnHitFx(HitEntry entry, Collider col)

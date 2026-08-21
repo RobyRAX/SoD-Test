@@ -83,6 +83,7 @@ public class HitEntry
     public float damage;
     public float knockBack;
     public float cameraShakePower;
+    public float cameraShakeDuration;
     public float hitStopTimeScale = 0.1f;
     public float hitStopDuration = 0.2f;
     public GameObject hitFxPrefab;
