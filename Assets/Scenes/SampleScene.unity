@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 358051447}
   - component: {fileID: 358051446}
   - component: {fileID: 358051445}
+  - component: {fileID: 358051449}
   m_Layer: 7
   m_Name: Dummy Enemy (1)
   m_TagString: Untagged
@@ -548,6 +549,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358051449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358051444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91463493b6ced64fac3d13adf506ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageableDummy
+  maxHp: 100
 --- !u!1 &376606721
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,8 +651,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376606721}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04399079, y: 0, z: 0.0020891726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -658,6 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10789a2a50660af409630cd0dc16776f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUnitController
+  maxHp: 100
   brainCamera: {fileID: 330585546}
   animationClips: {fileID: 11400000, guid: 8f3c1a9e2b4d4c6e8a0b1c2d3e4f5a61, type: 2}
   brainType: 1
@@ -760,6 +775,9 @@ MonoBehaviour:
     m_Bits: 128
   targetDetectRadius: 8
   nearbyBufferSize: 8
+  hitDetectRadius: 0.65
+  hitDetectPosition: {x: 0, y: 0.75, z: 0.54}
+  hitBufferSize: 16
 --- !u!114 &376606732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,6 +929,7 @@ GameObject:
   - component: {fileID: 687407579}
   - component: {fileID: 687407578}
   - component: {fileID: 687407577}
+  - component: {fileID: 687407581}
   m_Layer: 7
   m_Name: Dummy Enemy (2)
   m_TagString: Untagged
@@ -1013,6 +1032,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &687407581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687407576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91463493b6ced64fac3d13adf506ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageableDummy
+  maxHp: 100
 --- !u!4 &705247100 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
@@ -2516,6 +2548,7 @@ GameObject:
   - component: {fileID: 1157627435}
   - component: {fileID: 1157627434}
   - component: {fileID: 1157627433}
+  - component: {fileID: 1157627437}
   m_Layer: 7
   m_Name: Dummy Enemy
   m_TagString: Untagged
@@ -2618,6 +2651,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157627437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157627432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91463493b6ced64fac3d13adf506ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageableDummy
+  maxHp: 100
 --- !u!1 &1634067433
 GameObject:
   m_ObjectHideFlags: 0

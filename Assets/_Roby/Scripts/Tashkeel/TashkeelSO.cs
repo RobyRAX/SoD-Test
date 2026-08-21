@@ -19,6 +19,12 @@ public class TashkeelSO : ScriptableObject
     public TashkeelActionType actionType;
 
     [ShowIf("@IsAttack")]
+    public List<HitEntry> hitEntries;
+
+    [ShowIf("@IsAttack")]
+    public List<VfxEntry> vfxEntries;
+
+    [ShowIf("@IsAttack")]
     public List<AttackAction> attackActions;
 
     bool IsAttack => actionType == TashkeelActionType.Attack;
@@ -72,6 +78,25 @@ public class AttackTimeEntrySet
 }
 
 [Serializable]
+public class HitEntry
+{
+    public float damage;
+    public float knockBack;
+    public float cameraShakePower;
+    public float hitStopTimeScale = 0.1f;
+    public float hitStopDuration = 0.2f;
+    public GameObject hitFxPrefab;
+}
+
+[Serializable]
+public class VfxEntry
+{
+    public Vector3 pos;
+    public Vector3 rot;
+    public GameObject vfxPrefab;
+}
+
+[Serializable]
 public class HitTimeEntry
 {
     [SuffixLabel("seconds")]
@@ -86,5 +111,5 @@ public class VfxTimeEntry
     [SuffixLabel("seconds")]
     public float time;
 
-    public string vfxId;
+    public int vfxIndex;
 }

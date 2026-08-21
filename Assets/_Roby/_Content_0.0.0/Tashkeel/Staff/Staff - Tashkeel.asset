@@ -48,6 +48,17 @@ MonoBehaviour:
     speed: 1
     showAeTool: 0
   actionType: 1
+  hitEntries:
+  - damage: 10
+    knockBack: 0
+    cameraShakePower: 0
+    hitStopTimeScale: 0.1
+    hitStopDuration: 0.2
+    hitFxPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  vfxEntries:
+  - pos: {x: 0, y: 0, z: 0}
+    rot: {x: 0, y: 0, z: 0}
+    vfxPrefab: {fileID: 0}
   attackActions:
   - attackId: staff_atk_0
     animation:
@@ -67,7 +78,7 @@ MonoBehaviour:
         hitIndex: 0
       vfxEntries:
       - time: 0.2
-        vfxId: staff_atk_0_vfx
+        vfxIndex: 0
     allowTransitionTime: 0.6
     endTime: 0.9166667
     resetAttackSetTime: 1.1666666
@@ -91,7 +102,7 @@ MonoBehaviour:
         hitIndex: 0
       vfxEntries:
       - time: 0.2
-        vfxId: staff_atk_1_vfx
+        vfxIndex: 0
     allowTransitionTime: 0.75
     endTime: 1
     resetAttackSetTime: 1.25
@@ -115,7 +126,7 @@ MonoBehaviour:
         hitIndex: 0
       vfxEntries:
       - time: 0.2
-        vfxId: 
+        vfxIndex: 0
     allowTransitionTime: 1.25
     endTime: 1.25
     resetAttackSetTime: 1.25

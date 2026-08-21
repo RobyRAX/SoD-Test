@@ -3,8 +3,56 @@ using RAXY.Animation;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public abstract class UnitControllerBase : MonoBehaviour
+public abstract class UnitControllerBase : MonoBehaviour, IDamageable
 {
+    #region IDamageable
+    public Transform GetTransform => this.transform;
+    public GameObject GetGameObject => this.gameObject;
+    
+    [ShowInInspector]
+    public float CurrentHp { get; set; }
+
+    [SerializeField]
+    float maxHp;
+    public float MaxHp { get => maxHp; set { maxHp = value; } }
+    public void TakeDamage(float damage)
+    {
+        CurrentHp -= damage;
+
+        if (CurrentHp <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        
+    }
+
+    public void SetAlive()
+    {
+        CurrentHp = MaxHp;
+    }
+
+    public void TakeKnockBack(float power, Vector3 direction)
+    {
+        if (power <= 0f || MovementCont == null)
+            return;
+
+        direction.y = 0f;
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        Vector3 impulse = direction.normalized * power;
+        MovementCont.AddImpulse(
+            impulse,
+            horizontalDecay: 0f,
+            verticalDecay: 0f,
+            forceUnground: false,
+            resetGravity: false,
+            removeOnGrounded: false);
+    }
+    #endregion
+
     [SerializeField]
     protected Transform brainCamera;
 
@@ -52,6 +100,8 @@ public abstract class UnitControllerBase : MonoBehaviour
         AnimancerCont = GetComponent<AnimancerController>();
         CombatCont = GetComponent<UnitCombat>();
         UnitStateMachine = new UnitStateMachine(this);
+        
+        SetAlive();
     }
 
     public virtual void InitBrain(BrainType brainType, BrainConfigBaseSO configSO)

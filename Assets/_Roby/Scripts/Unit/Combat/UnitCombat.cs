@@ -34,6 +34,20 @@ public class UnitCombat : MonoBehaviour
     [SerializeField]
     int nearbyBufferSize = 8;
 
+    [TitleGroup("Hit Detection")]
+    [SerializeField]
+    [SuffixLabel("meters")]
+    float hitDetectRadius = 1.5f;
+
+    [TitleGroup("Hit Detection")]
+    [SerializeField]
+    [Tooltip("Local offset from this unit. Sphere center = TransformPoint(hitDetectPosition).")]
+    Vector3 hitDetectPosition = new Vector3(0f, 1f, 1f);
+
+    [TitleGroup("Hit Detection")]
+    [SerializeField]
+    int hitBufferSize = 16;
+
     [ShowInInspector]
     [ReadOnly]
     int _currentIndex;
@@ -71,6 +85,8 @@ public class UnitCombat : MonoBehaviour
     AttackAction _currentAction;
     Collider[] _nearbyBuffer;
     int _nearbyCount;
+    Collider[] _hitBuffer;
+    readonly HashSet<IDamageable> _hitDamageables = new();
     Coroutine _dashCoroutine;
 
     public bool IsAttacking => _isAttacking;
@@ -83,6 +99,7 @@ public class UnitCombat : MonoBehaviour
     {
         CacheRefs();
         EnsureNearbyBuffer();
+        EnsureHitBuffer();
     }
 
     public void CacheRefs()
@@ -96,6 +113,18 @@ public class UnitCombat : MonoBehaviour
         int size = Mathf.Max(1, nearbyBufferSize);
         if (_nearbyBuffer == null || _nearbyBuffer.Length != size)
             _nearbyBuffer = new Collider[size];
+    }
+
+    void EnsureHitBuffer()
+    {
+        int size = Mathf.Max(1, hitBufferSize);
+        if (_hitBuffer == null || _hitBuffer.Length != size)
+            _hitBuffer = new Collider[size];
+    }
+
+    Vector3 GetHitDetectWorldCenter()
+    {
+        return transform.TransformPoint(hitDetectPosition);
     }
 
     [Button("Debug / Commence Attack")]
@@ -398,11 +427,69 @@ public class UnitCombat : MonoBehaviour
     public void OnAttackHit(string attackId, int hitIndex)
     {
         Debug.Log($"[Attack] Hit: {attackId} index={hitIndex}", this);
+        ApplyHit(hitIndex);
     }
 
     public void OnAttackLastHit(string attackId, int hitIndex)
     {
         Debug.Log($"[Attack] LastHit: {attackId} index={hitIndex}", this);
+        ApplyHit(hitIndex);
+    }
+
+    void ApplyHit(int hitIndex)
+    {
+        if (tashkeel == null || tashkeel.hitEntries == null)
+        {
+            Debug.LogWarning($"[{name}] ApplyHit: no hitEntries on Tashkeel.", this);
+            return;
+        }
+
+        if (hitIndex < 0 || hitIndex >= tashkeel.hitEntries.Count)
+        {
+            Debug.LogWarning($"[{name}] ApplyHit: hitIndex {hitIndex} out of range (count={tashkeel.hitEntries.Count}).", this);
+            return;
+        }
+
+        HitEntry entry = tashkeel.hitEntries[hitIndex];
+        if (entry == null)
+        {
+            Debug.LogWarning($"[{name}] ApplyHit: HitEntry at {hitIndex} is null.", this);
+            return;
+        }
+
+        EnsureHitBuffer();
+        Vector3 center = GetHitDetectWorldCenter();
+        int hitCount = Physics.OverlapSphereNonAlloc(
+            center,
+            hitDetectRadius,
+            _hitBuffer,
+            enemyLayer);
+
+        _hitDamageables.Clear();
+        for (int i = 0; i < hitCount; i++)
+        {
+            Collider col = _hitBuffer[i];
+            if (col == null)
+                continue;
+
+            IDamageable damageable = col.GetComponentInParent<IDamageable>();
+            if (damageable == null || damageable.GetGameObject == gameObject)
+                continue;
+
+            if (!_hitDamageables.Add(damageable))
+                continue;
+
+            if (entry.damage > 0f)
+                damageable.TakeDamage(entry.damage);
+
+            if (entry.knockBack > 0f)
+            {
+                Vector3 dir = damageable.GetTransform.position - transform.position;
+                dir.y = 0f;
+                if (dir.sqrMagnitude >= 0.0001f)
+                    damageable.TakeKnockBack(entry.knockBack, dir);
+            }
+        }
     }
 
     public void OnAttackVfx(string vfxId)
@@ -527,8 +614,16 @@ public class UnitCombat : MonoBehaviour
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
+        // Target acquire (look / sticky)
         Gizmos.color = new Color(1f, 0.35f, 0.2f, 0.35f);
         Gizmos.DrawWireSphere(transform.position, targetDetectRadius);
+
+        // Hit damage sphere (local offset)
+        Vector3 hitCenter = GetHitDetectWorldCenter();
+        Gizmos.color = new Color(1f, 0.85f, 0.1f, 0.9f);
+        Gizmos.DrawWireSphere(hitCenter, hitDetectRadius);
+        Gizmos.color = new Color(1f, 0.85f, 0.1f, 0.15f);
+        Gizmos.DrawSphere(hitCenter, hitDetectRadius);
 
         if (_currentTarget != null)
         {
@@ -600,7 +695,7 @@ public static class AttackEventSequenceBuilder
                     timeEntry = new TimeEntry { time = Mathf.Clamp(vfx.time, 0f, maxTime) },
                     parameters = new[]
                     {
-                        new EventParameter { stringParam = vfx.vfxId }
+                        new EventParameter { intParam = vfx.vfxIndex }
                     }
                 });
             }
