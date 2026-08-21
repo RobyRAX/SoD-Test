@@ -45,6 +45,12 @@ public class ActiveUnitBrain : BrainBase
 
         if (Config.attackEventSO != null)
             Config.attackEventSO.Subscribe(AttackChangeHandler);
+
+        if (Config.switchEq1EventSO != null)
+            Config.switchEq1EventSO.Subscribe(SwitchEq1ChangeHandler);
+
+        if (Config.switchEq2EventSO != null)
+            Config.switchEq2EventSO.Subscribe(SwitchEq2ChangeHandler);
     }
 
     public void UnsubscribeToEventSO()
@@ -66,6 +72,12 @@ public class ActiveUnitBrain : BrainBase
 
         if (Config.attackEventSO != null)
             Config.attackEventSO.Unsubscribe(AttackChangeHandler);
+
+        if (Config.switchEq1EventSO != null)
+            Config.switchEq1EventSO.Unsubscribe(SwitchEq1ChangeHandler);
+
+        if (Config.switchEq2EventSO != null)
+            Config.switchEq2EventSO.Unsubscribe(SwitchEq2ChangeHandler);
     }
 
     public override Vector2 Move
@@ -118,5 +130,15 @@ public class ActiveUnitBrain : BrainBase
     void AttackChangeHandler(InputContext ctx)
     {
         Attack = ctx.BoolValue;
+    }
+
+    void SwitchEq1ChangeHandler(InputContext ctx)
+    {
+        SwitchEq1 = ctx.BoolValue;
+    }
+
+    void SwitchEq2ChangeHandler(InputContext ctx)
+    {
+        SwitchEq2 = ctx.BoolValue;
     }
 }

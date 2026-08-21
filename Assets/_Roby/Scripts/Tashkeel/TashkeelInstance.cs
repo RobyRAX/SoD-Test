@@ -12,17 +12,24 @@ public class TashkeelInstance : MonoBehaviour
     [TitleGroup("Runtime")]
     [ShowInInspector]
     public UnitControllerBase HolderUnit { get; set; }
-    
+
     MultiParent multiParent;
 
     void Start()
     {
+        if (HolderUnit != null)
+            BindToHolder(HolderUnit);
+    }
+
+    public void BindToHolder(UnitControllerBase holder)
+    {
+        HolderUnit = holder;
         multiParent = GetComponent<MultiParent>();
 
-        if (multiParent != null)
-        {
-            multiParent.FindFollowTargets(transform.parent);
-            multiParent.SetTarget(0);
-        }
+        if (multiParent == null || holder == null)
+            return;
+
+        multiParent.FindFollowTargets(holder.transform);
+        multiParent.SetTarget(0);
     }
 }

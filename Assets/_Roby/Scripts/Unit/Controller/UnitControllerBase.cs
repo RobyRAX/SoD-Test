@@ -70,6 +70,22 @@ public abstract class UnitControllerBase : MonoBehaviour, IDamageable
 
     public virtual UnitAnimationClipsBaseSO AnimationClips { get; }
 
+    public virtual AnimationClipSet ResolveIdleAnimation() =>
+        ResolveLocomotionClip(CombatCont?.CombatData?.Idle, AnimationClips?.Idle);
+
+    public virtual AnimationClipSet ResolveWalkAnimation() =>
+        ResolveLocomotionClip(CombatCont?.CombatData?.Walk, AnimationClips?.Walk);
+
+    public virtual AnimationClipSet ResolveRunAnimation() =>
+        ResolveLocomotionClip(CombatCont?.CombatData?.Run, AnimationClips?.Run);
+
+    protected static AnimationClipSet ResolveLocomotionClip(AnimationClipSet overrideClip, AnimationClipSet fallback)
+    {
+        if (overrideClip?.AnimationClip != null)
+            return overrideClip;
+        return fallback;
+    }
+
     public event Action<bool> OnWalkRunToggled;
 
     bool _isWalkMode;
@@ -100,7 +116,7 @@ public abstract class UnitControllerBase : MonoBehaviour, IDamageable
         AnimancerCont = GetComponent<AnimancerController>();
         CombatCont = GetComponent<UnitCombat>();
         UnitStateMachine = new UnitStateMachine(this);
-        
+
         SetAlive();
     }
 

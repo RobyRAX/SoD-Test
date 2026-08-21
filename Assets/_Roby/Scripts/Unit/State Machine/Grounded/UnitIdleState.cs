@@ -13,10 +13,11 @@ public class UnitIdleState : UnitGroundedState
     {
         base.Enter();
 
-        if (SM.AnimancerCont != null && SM.AnimationClips?.Idle != null)
+        AnimationClipSet clipSet = SM.Cont?.ResolveIdleAnimation();
+        if (SM.AnimancerCont != null && clipSet?.AnimationClip != null)
         {
             SM.AnimancerCont.PlayAnimation(
-                SM.AnimationClips.Idle,
+                clipSet,
                 0.25f,
                 AnimancerController.MAIN_LAYER);
         }

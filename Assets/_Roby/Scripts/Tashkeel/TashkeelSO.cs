@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TashkeelSO", menuName = "Scriptable Objects/TashkeelSO")]
-public class TashkeelSO : ScriptableObject
+public class TashkeelSO : ScriptableObject, ICombatData
 {
     public string tashkeelId;
     public TashkeelInstance tashkeelPrefab;
@@ -16,7 +16,7 @@ public class TashkeelSO : ScriptableObject
     public AnimationClipSet run;
 
     [TitleGroup("Action")]
-    public TashkeelActionType actionType;
+    public CombatActionType actionType;
 
     [ShowIf("@IsAttack")]
     public List<HitEntry> hitEntries;
@@ -27,13 +27,15 @@ public class TashkeelSO : ScriptableObject
     [ShowIf("@IsAttack")]
     public List<AttackAction> attackActions;
 
-    bool IsAttack => actionType == TashkeelActionType.Attack;
-}
+    bool IsAttack => actionType == CombatActionType.Attack;
 
-public enum TashkeelActionType
-{
-    Nothing,
-    Attack
+    CombatActionType ICombatData.ActionType => actionType;
+    IReadOnlyList<AttackAction> ICombatData.AttackActions => attackActions;
+    IReadOnlyList<HitEntry> ICombatData.HitEntries => hitEntries;
+    IReadOnlyList<VfxEntry> ICombatData.VfxEntries => vfxEntries;
+    AnimationClipSet ICombatData.Idle => idle;
+    AnimationClipSet ICombatData.Walk => walk;
+    AnimationClipSet ICombatData.Run => run;
 }
 
 [Serializable]

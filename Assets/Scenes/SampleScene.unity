@@ -690,7 +690,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 766446915}
-  - {fileID: 705247100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &376606726
@@ -710,6 +709,10 @@ MonoBehaviour:
   animationClips: {fileID: 11400000, guid: 8f3c1a9e2b4d4c6e8a0b1c2d3e4f5a61, type: 2}
   brainType: 1
   activeUnitBrainConfig: {fileID: 11400000, guid: 9a4b2c8d1e5f4760b3c4d5e6f7081920, type: 2}
+  eq1Tashkeel: {fileID: 11400000, guid: 945440399a5b8bc43ac732045eef088e, type: 2}
+  eq1Unlocked: 0
+  eq2Tashkeel: {fileID: 11400000, guid: 7da0200fe48e16d4c9ed289fdfe87a75, type: 2}
+  eq2Unlocked: 0
 --- !u!95 &376606727
 Animator:
   serializedVersion: 7
@@ -802,7 +805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b2c3d4e5f64789a0b1c2d3e4f50601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitCombat
-  tashkeel: {fileID: 11400000, guid: 945440399a5b8bc43ac732045eef088e, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1078,11 +1080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageableDummy
   maxHp: 100
---- !u!4 &705247100 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-  m_PrefabInstance: {fileID: 4356946639279506452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &766446914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2588,21 +2585,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: RAXY.InputSystem::RAXY.InputSystem.InputActionEventBindingManager
   InputActionBindings:
   - unityInputAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    actionEventSO: {fileID: 0}
+    actionEventSO: {fileID: 11400000, guid: c4d5e6f7081920a1b2c3d4e5f6071829, type: 2}
   - unityInputAction: {fileID: 2447722798959193214, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     actionEventSO: {fileID: 11400000, guid: ab266754c8282ac47a49a2b922e28d38, type: 2}
   - unityInputAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    actionEventSO: {fileID: 0}
+    actionEventSO: {fileID: 11400000, guid: 1cae1a89fb429cb4b95fdfe626a14ca0, type: 2}
   - unityInputAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     actionEventSO: {fileID: 11400000, guid: 4a13675ec913a38428e3874180e7b867, type: 2}
-  - unityInputAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    actionEventSO: {fileID: 0}
   - unityInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     actionEventSO: {fileID: 11400000, guid: 7d0110c72022e43459c90fcffc6368b5, type: 2}
   - unityInputAction: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     actionEventSO: {fileID: 11400000, guid: bb096bf1a3bf8b9458de19177601d792, type: 2}
-  - unityInputAction: {fileID: 11400000, guid: d5e6f7081920a1b2c3d4e5f60718293a, type: 2}
-    actionEventSO: {fileID: 11400000, guid: c4d5e6f7081920a1b2c3d4e5f6071829, type: 2}
+  - unityInputAction: {fileID: 4740607122652653365, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    actionEventSO: {fileID: 11400000, guid: 7fa54ffda625ef3439d4360e0efe6585, type: 2}
+  - unityInputAction: {fileID: 1765571290699063794, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    actionEventSO: {fileID: 11400000, guid: d47c3792b19233641b48ece1dfe41c10, type: 2}
 --- !u!114 &1016315832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2922,11 +2919,6 @@ Transform:
   - {fileID: 1090575912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1818826720 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7719285137122945660, guid: a851dc28c803cbc4987049333f1d01b6, type: 3}
-  m_PrefabInstance: {fileID: 766446914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110282388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,7 +2929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110282389}
   m_Layer: 0
-  m_Name: Tashkeel Database
+  m_Name: Game Database
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2958,67 +2950,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1634067434}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4356946639279506452
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 376606725}
-    m_Modifications:
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.23986565
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.27220142
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.03886209
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.00000008940697
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.00000014901161
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1986048992674880648, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105471687921863941, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: m_Name
-      value: Tashkeel_Staff
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805232663384755230, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
-      propertyPath: 'followTargets.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1818826720}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

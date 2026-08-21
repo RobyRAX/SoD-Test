@@ -9,6 +9,8 @@ public abstract class BrainBase
     public event Action<bool> OnJumpChange;
     public event Action<bool> OnDashChange;
     public event Action<bool> OnAttackChange;
+    public event Action<bool> OnSwitchEq1Change;
+    public event Action<bool> OnSwitchEq2Change;
 
     public UnitControllerBase Cont { get; }
     public UnitStateMachine UnitSM { get; set; }
@@ -100,6 +102,38 @@ public abstract class BrainBase
         }
     }
 
+    bool _switchEq1;
+    [TitleGroup("Input To Send")]
+    [ShowInInspector]
+    public virtual bool SwitchEq1
+    {
+        get => _switchEq1;
+        set
+        {
+            if (_switchEq1 == value)
+                return;
+
+            _switchEq1 = value;
+            OnSwitchEq1Change?.Invoke(_switchEq1);
+        }
+    }
+
+    bool _switchEq2;
+    [TitleGroup("Input To Send")]
+    [ShowInInspector]
+    public virtual bool SwitchEq2
+    {
+        get => _switchEq2;
+        set
+        {
+            if (_switchEq2 == value)
+                return;
+
+            _switchEq2 = value;
+            OnSwitchEq2Change?.Invoke(_switchEq2);
+        }
+    }
+
     public virtual void Update() { }
     public virtual void OnDestroy() { }
 
@@ -110,5 +144,7 @@ public abstract class BrainBase
         Jump = false;
         Dash = false;
         Attack = false;
+        SwitchEq1 = false;
+        SwitchEq2 = false;
     }
 }

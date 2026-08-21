@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f995bd1354f1945bd991fecaf03fca, type: 3}
-  m_Name: Staff - Tashkeel
+  m_Name: Compass - Tashkeel
   m_EditorClassIdentifier: Assembly-CSharp::TashkeelSO
-  tashkeelId: staff
-  tashkeelPrefab: {fileID: 8460799610067300966, guid: 22f1ca7d35c24134881edb03ea98e556, type: 3}
+  tashkeelId: compass
+  tashkeelPrefab: {fileID: 3144429330919436880, guid: 6acd70cfa308fcc419452ffe89f0d774, type: 3}
   idle:
     useAddressable: 0
-    animationClip: {fileID: 7400000, guid: 41a266cfd2303b74c984bd6ef05a9001, type: 2}
+    animationClip: {fileID: 0}
     animationClipRef:
       m_AssetGUID: 
       m_SubObjectName: 
@@ -47,7 +47,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     speed: 1
     showAeTool: 0
-  actionType: 1
+  actionType: 0
   hitEntries:
   - damage: 10
     knockBack: 0

@@ -17,3 +17,5 @@ MonoBehaviour:
   jumpEventSO: {fileID: 11400000, guid: 4a13675ec913a38428e3874180e7b867, type: 2}
   dashEventSO: {fileID: 11400000, guid: ab266754c8282ac47a49a2b922e28d38, type: 2}
   attackEventSO: {fileID: 11400000, guid: c4d5e6f7081920a1b2c3d4e5f6071829, type: 2}
+  switchEq1EventSO: {fileID: 11400000, guid: 7fa54ffda625ef3439d4360e0efe6585, type: 2}
+  switchEq2EventSO: {fileID: 11400000, guid: d47c3792b19233641b48ece1dfe41c10, type: 2}

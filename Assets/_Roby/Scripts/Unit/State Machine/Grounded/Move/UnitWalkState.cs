@@ -19,10 +19,11 @@ public class UnitWalkState : UnitMoveState
     {
         base.Enter();
 
-        if (SM.AnimancerCont != null && SM.AnimationClips?.Walk != null)
+        AnimationClipSet clipSet = SM.Cont?.ResolveWalkAnimation();
+        if (SM.AnimancerCont != null && clipSet?.AnimationClip != null)
         {
             SM.AnimancerCont.PlayAnimation(
-                SM.AnimationClips.Walk,
+                clipSet,
                 0.2f,
                 AnimancerController.MAIN_LAYER);
         }

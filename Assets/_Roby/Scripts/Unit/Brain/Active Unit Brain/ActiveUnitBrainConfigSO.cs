@@ -9,4 +9,6 @@ public class ActiveUnitBrainConfigSO : BrainConfigBaseSO
     public InputActionEventSO jumpEventSO;
     public InputActionEventSO dashEventSO;
     public InputActionEventSO attackEventSO;
+    public InputActionEventSO switchEq1EventSO;
+    public InputActionEventSO switchEq2EventSO;
 }

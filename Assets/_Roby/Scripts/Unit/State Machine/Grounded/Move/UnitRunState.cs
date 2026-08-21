@@ -18,10 +18,11 @@ public class UnitRunState : UnitMoveState
     {
         base.Enter();
 
-        if (SM.AnimancerCont != null && SM.AnimationClips?.Run != null)
+        AnimationClipSet clipSet = SM.Cont?.ResolveRunAnimation();
+        if (SM.AnimancerCont != null && clipSet?.AnimationClip != null)
         {
             SM.AnimancerCont.PlayAnimation(
-                SM.AnimationClips.Run,
+                clipSet,
                 0.2f,
                 AnimancerController.MAIN_LAYER);
         }

@@ -20,8 +20,10 @@ public class UnitCombat : MonoBehaviour
     public const float DashSpeed = 15f;
     public const float DashDuration = 0.1f;
 
-    [SerializeField]
-    TashkeelSO tashkeel;
+    [TitleGroup("Combat Data")]
+    [ShowInInspector]
+    [ReadOnly]
+    public ICombatData CombatData { get; set; }
 
     [TitleGroup("Target Detection")]
     [SerializeField]
@@ -93,7 +95,6 @@ public class UnitCombat : MonoBehaviour
     public bool IsAttacking => _isAttacking;
     public bool IsAttackDashing => _isAttackDashing;
     public AttackPhase AttackPhase => _attackPhase;
-    public TashkeelSO Tashkeel => tashkeel;
     public Collider CurrentTarget => _currentTarget;
 
     void Awake()
@@ -107,6 +108,55 @@ public class UnitCombat : MonoBehaviour
     {
         _cont = GetComponent<UnitControllerBase>();
         _eventSequencer = GetComponent<UnitAttackEventSequencer>();
+    }
+
+    public void StopCombat()
+    {
+        CacheRefs();
+        StopAttackDash();
+        _eventSequencer?.StopAllSequence();
+        ResetAttackFlags();
+
+        var sm = _cont?.UnitStateMachine;
+        if (sm != null && sm.CurrentState == sm.Attack)
+            sm.ChangeState(sm.Idle);
+    }
+
+    public void RefreshLocomotionAnimation()
+    {
+        CacheRefs();
+        var sm = _cont?.UnitStateMachine;
+        if (sm == null || sm.AnimancerCont == null || _cont == null)
+            return;
+
+        AnimationClipSet clipSet = null;
+        float fade = 0.2f;
+
+        if (sm.CurrentState == sm.Idle)
+        {
+            clipSet = _cont.ResolveIdleAnimation();
+            fade = 0.25f;
+        }
+        else if (sm.CurrentState == sm.Walk)
+        {
+            clipSet = _cont.ResolveWalkAnimation();
+        }
+        else if (sm.CurrentState == sm.Run)
+        {
+            clipSet = _cont.ResolveRunAnimation();
+        }
+        else
+        {
+            return;
+        }
+
+        if (clipSet?.AnimationClip != null)
+        {
+            sm.AnimancerCont.PlayAnimation(
+                clipSet,
+                fade,
+                AnimancerController.MAIN_LAYER);
+        }
     }
 
     void EnsureNearbyBuffer()
@@ -131,12 +181,12 @@ public class UnitCombat : MonoBehaviour
     [Button("Debug / Commence Attack")]
     public void TryCommenceAttack()
     {
-        if (tashkeel == null ||
-            tashkeel.actionType != TashkeelActionType.Attack ||
-            tashkeel.attackActions == null ||
-            tashkeel.attackActions.Count == 0)
+        if (CombatData == null ||
+            CombatData.ActionType != CombatActionType.Attack ||
+            CombatData.AttackActions == null ||
+            CombatData.AttackActions.Count == 0)
         {
-            Debug.LogWarning($"[{name}] TryCommenceAttack: no attack actions on Tashkeel.", this);
+            Debug.LogWarning($"[{name}] TryCommenceAttack: no attack actions on CombatData.", this);
             return;
         }
 
@@ -152,24 +202,24 @@ public class UnitCombat : MonoBehaviour
             {
                 _forceStartFromZero = false;
                 _currentIndex = 0;
-                ExecuteAttack(tashkeel.attackActions[0]);
+                ExecuteAttack(CombatData.AttackActions[0]);
                 return;
             }
 
-            if (_currentIndex + 1 >= tashkeel.attackActions.Count)
+            if (_currentIndex + 1 >= CombatData.AttackActions.Count)
             {
                 _inputTriggered = true;
                 return;
             }
 
             _currentIndex++;
-            ExecuteAttack(tashkeel.attackActions[_currentIndex]);
+            ExecuteAttack(CombatData.AttackActions[_currentIndex]);
             return;
         }
 
         _currentIndex = 0;
         _forceStartFromZero = false;
-        ExecuteAttack(tashkeel.attackActions[_currentIndex]);
+        ExecuteAttack(CombatData.AttackActions[_currentIndex]);
     }
 
     public void ExecuteAttack(AttackAction action)
@@ -439,19 +489,19 @@ public class UnitCombat : MonoBehaviour
 
     void ApplyHit(int hitIndex)
     {
-        if (tashkeel == null || tashkeel.hitEntries == null)
+        if (CombatData == null || CombatData.HitEntries == null)
         {
-            Debug.LogWarning($"[{name}] ApplyHit: no hitEntries on Tashkeel.", this);
+            Debug.LogWarning($"[{name}] ApplyHit: no HitEntries on CombatData.", this);
             return;
         }
 
-        if (hitIndex < 0 || hitIndex >= tashkeel.hitEntries.Count)
+        if (hitIndex < 0 || hitIndex >= CombatData.HitEntries.Count)
         {
-            Debug.LogWarning($"[{name}] ApplyHit: hitIndex {hitIndex} out of range (count={tashkeel.hitEntries.Count}).", this);
+            Debug.LogWarning($"[{name}] ApplyHit: hitIndex {hitIndex} out of range (count={CombatData.HitEntries.Count}).", this);
             return;
         }
 
-        HitEntry entry = tashkeel.hitEntries[hitIndex];
+        HitEntry entry = CombatData.HitEntries[hitIndex];
         if (entry == null)
         {
             Debug.LogWarning($"[{name}] ApplyHit: HitEntry at {hitIndex} is null.", this);
@@ -627,14 +677,14 @@ public class UnitCombat : MonoBehaviour
         }
 
         _currentIndex++;
-        ExecuteAttack(tashkeel.attackActions[_currentIndex]);
+        ExecuteAttack(CombatData.AttackActions[_currentIndex]);
     }
 
     bool CanContinueToNext()
     {
-        return tashkeel != null &&
-               tashkeel.attackActions != null &&
-               _currentIndex + 1 < tashkeel.attackActions.Count;
+        return CombatData != null &&
+               CombatData.AttackActions != null &&
+               _currentIndex + 1 < CombatData.AttackActions.Count;
     }
 
     void FinishAttack()
