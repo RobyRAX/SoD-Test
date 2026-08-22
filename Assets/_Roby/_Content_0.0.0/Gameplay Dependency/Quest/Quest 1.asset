@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Quest 1
   m_EditorClassIdentifier: RAXY.Quest::RAXY.Quest.QuestSO
   questType: 0
+  autoComplete: 0
   questNameProvider:
     useLocalization: 0
     directString: Lost and Found
@@ -43,6 +44,7 @@ MonoBehaviour:
           m_LocalVariables: []
     stepMode: 0
     actions_OnEnter: []
+    actions_OnComplete: []
     mainObjectives:
     - eventSO: {fileID: 11400000, guid: edc4a50e41d2d434fb0814f623963700, type: 2}
       objectiveParameter: Nibbles
@@ -76,10 +78,17 @@ MonoBehaviour:
           m_LocalVariables: []
     stepMode: 0
     actions_OnEnter: []
+    actions_OnComplete:
+    - rid: 5965375561742156226
+    - rid: 5965375561742156227
+    - rid: 5965375561742156228
+    - rid: 5965375561742156229
+    - rid: 5965375561742156230
+    - rid: 5965375561742156231
     mainObjectives:
     - eventSO: {fileID: 11400000, guid: edc4a50e41d2d434fb0814f623963700, type: 2}
       objectiveParameter: Nibbles' Mom
-      requiredAmount: 0
+      requiredAmount: 1
       descriptionProvider:
         useLocalization: 0
         directString: 
@@ -98,4 +107,34 @@ MonoBehaviour:
   actions_OnCompleted: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5965375561742156226
+      type: {class: SetColorOverlay, ns: , asm: Assembly-CSharp}
+      data:
+        color: {r: 0, g: 0, b: 0, a: 1}
+        fadeDuration: 0.25
+    - rid: 5965375561742156227
+      type: {class: SetTextOverlay, ns: , asm: Assembly-CSharp}
+      data:
+        text: Nibbles and his mom join the parade
+        color: {r: 1, g: 1, b: 1, a: 1}
+        fadeDuration: 0
+    - rid: 5965375561742156228
+      type: {class: CompleteQuest, ns: RAXY.Quest, asm: RAXY.Quest}
+      data:
+        questToComplete: {fileID: 11400000}
+    - rid: 5965375561742156229
+      type: {class: WaitForSeconds, ns: RAXY.Quest, asm: Assembly-CSharp}
+      data:
+        waitDuration: 2
+    - rid: 5965375561742156230
+      type: {class: SetTextOverlay, ns: , asm: Assembly-CSharp}
+      data:
+        text: Nibbles and his mom join the parade
+        color: {r: 1, g: 1, b: 1, a: 0}
+        fadeDuration: 0.25
+    - rid: 5965375561742156231
+      type: {class: SetColorOverlay, ns: , asm: Assembly-CSharp}
+      data:
+        color: {r: 0, g: 0, b: 0, a: 0}
+        fadeDuration: 0.25
