@@ -1,4 +1,6 @@
 using RAXY.Animation;
+using RAXY.InputSystem;
+using RAXY.InteractionSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -14,9 +16,8 @@ public class PlayerUnitController : UnitControllerBase
     ActiveUnitBrainConfigSO activeUnitBrainConfig;
 
     [TitleGroup("Tashkeel")]
-    [SerializeField]
-    [LabelText("Eq1 (Staff)")]
-    TashkeelSO eq1Tashkeel;
+    [LabelText("Eq1")]
+    public TashkeelSO eq1Tashkeel;
 
     [TitleGroup("Tashkeel")]
     [SerializeField]
@@ -24,9 +25,8 @@ public class PlayerUnitController : UnitControllerBase
     bool eq1Unlocked = true;
 
     [TitleGroup("Tashkeel")]
-    [SerializeField]
-    [LabelText("Eq2 (Compass)")]
-    TashkeelSO eq2Tashkeel;
+    [LabelText("Eq2")]
+    public TashkeelSO eq2Tashkeel;
 
     [TitleGroup("Tashkeel")]
     [SerializeField]
@@ -65,6 +65,19 @@ public class PlayerUnitController : UnitControllerBase
 
     public override AnimationClipSet ResolveRunAnimation() =>
         ResolveLocomotionClip(EquippedTashkeel?.run, AnimationClips?.Run);
+
+    Interactor interactor;
+    public Interactor Interactor
+    {
+        get
+        {
+            if (interactor != null)
+                return interactor;
+            
+            interactor = GetComponent<Interactor>();
+            return interactor;
+        }
+    }
 
     void Start()
     {
@@ -138,6 +151,33 @@ public class PlayerUnitController : UnitControllerBase
             CombatCont.CombatData = null;
             CombatCont.RefreshLocomotionAnimation();
         }
+    }
+
+    public void SwitchToNextTashkeel()
+    {
+        TashkeelSO slot1 = eq1Unlocked ? eq1Tashkeel : null;
+        TashkeelSO slot2 = eq2Unlocked ? eq2Tashkeel : null;
+
+        if (slot1 == null && slot2 == null)
+            return;
+
+        if (slot1 != null && slot2 == null)
+        {
+            Equip(slot1);
+            return;
+        }
+
+        if (slot1 == null && slot2 != null)
+        {
+            Equip(slot2);
+            return;
+        }
+
+        // Both unlocked: cycle Eq1 -> Eq2 -> Eq1. Nothing equipped starts at Eq1.
+        if (EquippedTashkeel == slot1)
+            Equip(slot2);
+        else
+            Equip(slot1);
     }
 
     public void TryEquipSlot(int slot)
@@ -220,5 +260,16 @@ public class PlayerUnitController : UnitControllerBase
             Destroy(EquippedInstance.gameObject);
             EquippedInstance = null;
         }
+    }
+
+    public void UnlockEquipment_1()
+    {
+        Eq1Unlocked = true;
+        TryEquipSlot(1);
+    }
+
+    public void UnlockEquipment_2()
+    {
+        Eq2Unlocked = true;
     }
 }

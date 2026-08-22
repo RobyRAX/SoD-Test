@@ -7,6 +7,8 @@
     "com.raxy.inputsystem": "https://github.com/RobyRAX/RAXY-InputSystem.git",
     "com.raxy.interaction": "https://github.com/RobyRAX/RAXY-Interaction.git",
     "com.raxy.movement": "https://github.com/RobyRAX/RAXY-Movement.git",
+    "com.raxy.narrative": "https://github.com/RobyRAX/RAXY-Narrative.git",
+    "com.raxy.notification": "https://github.com/RobyRAX/RAXY-Notification.git",
     "com.raxy.package-installer": "https://github.com/RobyRAX/RAXY-Package-Installer.git",
     "com.raxy.pooling": "https://github.com/RobyRAX/RAXY-Pooling.git",
     "com.raxy.quest2": "https://github.com/RobyRAX/RAXY-Quest-V2.git",

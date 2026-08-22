@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Compass - Tashkeel
   m_EditorClassIdentifier: Assembly-CSharp::TashkeelSO
   tashkeelId: compass
+  tashkeelIcon: {fileID: 21300000, guid: 2da95198499ef6a4f89166ab1ae4250b, type: 3}
   tashkeelPrefab: {fileID: 3144429330919436880, guid: 6acd70cfa308fcc419452ffe89f0d774, type: 3}
   idle:
     useAddressable: 0
-    animationClip: {fileID: 0}
+    animationClip: {fileID: 7400000, guid: c797cf5ce62d575488e6e1c8fa6d538e, type: 2}
     animationClipRef:
       m_AssetGUID: 
       m_SubObjectName: 

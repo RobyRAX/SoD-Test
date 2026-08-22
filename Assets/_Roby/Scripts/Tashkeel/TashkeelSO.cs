@@ -8,6 +8,7 @@ using UnityEngine;
 public class TashkeelSO : ScriptableObject, ICombatData
 {
     public string tashkeelId;
+    public Sprite tashkeelIcon;
     public TashkeelInstance tashkeelPrefab;
 
     [TitleGroup("Animation Override")]
