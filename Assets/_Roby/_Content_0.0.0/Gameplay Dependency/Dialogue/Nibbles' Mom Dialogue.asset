@@ -541,6 +541,135 @@ MonoBehaviour:
     cachedActors:
     - {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
     cachedParentSO: {fileID: 11400000}
+  - dialogueCollectionId: progressQuest
+    portraitSetting_OnStart:
+      states:
+      - actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+        set: 0
+        portraitStateSetter:
+          positionSetter:
+            setPosition: 0
+            useTween: 1
+            customTweenDuration: 0
+            tweenDuration: 0.3
+            position: 0
+            HideUseTween: 1
+          mirrorSetter:
+            setMirror: 0
+            useTween: 1
+            customTweenDuration: 0
+            tweenDuration: 0.3
+            mirrored: 0
+            HideUseTween: 1
+          sizeSetter:
+            setSize: 0
+            useTween: 1
+            customTweenDuration: 0
+            tweenDuration: 0.3
+            sizeIndex: 0
+            HideUseTween: 1
+            MaxSizeIndex: 0
+            actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+          parts:
+          - partId: base
+            portraitSetter:
+              setPortrait: 0
+              portraitId: 
+              Ids: []
+            colorSetter:
+              setColor: 0
+              useTween: 1
+              customTweenDuration: 0
+              tweenDuration: 0.3
+              color: {r: 1, g: 1, b: 1, a: 1}
+              HideUseTween: 1
+          color: {r: 1, g: 1, b: 1, a: 1}
+          actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+      helper_HighlightActorId: 
+    narrativeActions_OnStart: []
+    dialogueLines:
+    - lineProvider:
+        useLocalization: 0
+        directString: "I can\u2019t sleep if he\u2019s not coming back to me."
+        stringLoc:
+          localizedString:
+            m_TableReference:
+              m_TableCollectionName: 
+            m_TableEntryReference:
+              m_KeyId: 0
+              m_Key: 
+            m_FallbackState: 0
+            m_WaitForCompletion: 0
+            m_LocalVariables: []
+      autoNextDuration: 5
+      actors:
+      - {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+      useCustomSpeakerName: 0
+      speakerActorId: Nibbles' Mom
+      customSpeakerNameProvider:
+        useLocalization: 0
+        directString: 
+        stringLoc:
+          localizedString:
+            m_TableReference:
+              m_TableCollectionName: 
+            m_TableEntryReference:
+              m_KeyId: 0
+              m_Key: 
+            m_FallbackState: 0
+            m_WaitForCompletion: 0
+            m_LocalVariables: []
+      portraitSetting_OnEnter:
+        states:
+        - actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+          set: 0
+          portraitStateSetter:
+            positionSetter:
+              setPosition: 0
+              useTween: 1
+              customTweenDuration: 0
+              tweenDuration: 0.3
+              position: 0
+              HideUseTween: 0
+            mirrorSetter:
+              setMirror: 0
+              useTween: 1
+              customTweenDuration: 0
+              tweenDuration: 0.3
+              mirrored: 0
+              HideUseTween: 0
+            sizeSetter:
+              setSize: 0
+              useTween: 1
+              customTweenDuration: 0
+              tweenDuration: 0.3
+              sizeIndex: 0
+              HideUseTween: 0
+              MaxSizeIndex: 0
+              actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+            parts:
+            - partId: base
+              portraitSetter:
+                setPortrait: 0
+                portraitId: 
+                Ids: []
+              colorSetter:
+                setColor: 0
+                useTween: 1
+                customTweenDuration: 0
+                tweenDuration: 0.3
+                color: {r: 1, g: 1, b: 1, a: 1}
+                HideUseTween: 0
+            color: {r: 1, g: 1, b: 1, a: 1}
+            actorSO: {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+        helper_HighlightActorId: 
+      narrativeActions_OnEnter: []
+      useAutoNext: 1
+      blockNextDuration: 0.3
+    narrativeActions_OnComplete: []
+    cachedActors:
+    - {fileID: 11400000, guid: 0a6b1bf5e5074a741bb33b701e39f315, type: 2}
+    cachedParentSO: {fileID: 11400000}
   - dialogueCollectionId: completeQuest
     portraitSetting_OnStart:
       states:

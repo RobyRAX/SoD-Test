@@ -5,6 +5,7 @@ using RAXY.InputSystem;
 using RAXY.Narrative;
 using RAXY.NotificationSystem;
 using RAXY.Utility;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -161,6 +162,7 @@ public class GameplayManager : Singleton<GameplayManager>
             playerUnit.Interactor.Interact();
     }
 
+    [Button]
     void OnEq1UnlockHandler()
     {
         TashkeelUnlockNotifReq newReq = new();

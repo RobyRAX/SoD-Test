@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6789012345678abcdef03, type: 3}
+  m_Name: NibblesAnimationClips
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAnimationClipsSO
+  Idle:
+    useAddressable: 0
+    animationClip: {fileID: 7400000, guid: 3d6c371ba9abc014b84a857bce659825, type: 2}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Walk:
+    useAddressable: 0
+    animationClip: {fileID: 7400000, guid: a1135328ba1fb1d4fa0b29d466a788c8, type: 2}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Run:
+    useAddressable: 0
+    animationClip: {fileID: 7400000, guid: 899307eeb9d47bb4bbbaae3d3d334fd6, type: 2}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  DodgeForward:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Jump:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  DoubleJump:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Fall:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Land:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Hit:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0
+  Die:
+    useAddressable: 0
+    animationClip: {fileID: 0}
+    animationClipRef:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    speed: 1
+    showAeTool: 0

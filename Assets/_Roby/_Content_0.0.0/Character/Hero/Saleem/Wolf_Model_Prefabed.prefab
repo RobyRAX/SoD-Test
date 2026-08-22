@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9312126e574e97047b72657b5431e12a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9312126e574e97047b72657b5431e12a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9312126e574e97047b72657b5431e12a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9312126e574e97047b72657b5431e12a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -58,10 +58,111 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b75e39a36fdf1c042b7c4ef6d39919d0, type: 2}
     - target: {fileID: 919132149155446097, guid: 9312126e574e97047b72657b5431e12a, type: 3}
       propertyPath: m_Name
-      value: animal_people_wolf_1
+      value: Wolf_Model_Prefabed
       objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -4161501295590791270, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4148182072684104477}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+--- !u!4 &7309938912026003723 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4161501295590791270, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+  m_PrefabInstance: {fileID: 2543828088536837777}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4475439899902192886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7309938912026003723}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6453255
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.06719335
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.47771516
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.52133393
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.47771364
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.52133375
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: m_Name
+      value: animal_people_beanie_wolf_1_onWear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775381839483542439, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a4a92a07aba349b448ce819c4e466d13, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4695531192535536075}
+  m_SourcePrefab: {fileID: 100100000, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+--- !u!1 &3664414082264109479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+  m_PrefabInstance: {fileID: 4475439899902192886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4695531192535536075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3664414082264109479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6c2c26d9959d48b586f10ce08618f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RAXY.Quest::RAXY.Quest.QuestObject
+  editor_QuestDb: {fileID: 0}
+  defaultVisibilityState: 0
+  toggleConditions:
+  - questId: Quest 1
+    questCompletionState: 3
+    steps: []
+--- !u!4 &4148182072684104477 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b0ec1ee6e853b6c4dafe50aa57a72e7b, type: 3}
+  m_PrefabInstance: {fileID: 4475439899902192886}
+  m_PrefabAsset: {fileID: 0}

@@ -136,13 +136,17 @@ public abstract class UnitControllerBase : MonoBehaviour, IDamageable
             if (Brain is ActiveUnitBrain activeUnitBrain)
                 activeUnitBrain.AssignCameraTransform(ResolveBrainCamera());
         }
+        else if (brainType == BrainType.FollowerAI)
+        {
+            Brain = new FollowerAIBrain(this, configSO as FollowerAIBrainConfigSO);
+        }
         else if (brainType == BrainType.Undefined)
         {
             Brain = new EmptyBrain(this);
         }
         else
         {
-            Debug.LogError($"[{name}] Unsupported BrainType: {brainType}. Use ActiveUnit or Undefined.", this);
+            Debug.LogError($"[{name}] Unsupported BrainType: {brainType}. Use ActiveUnit, FollowerAI, or Undefined.", this);
             Brain = new EmptyBrain(this);
         }
 

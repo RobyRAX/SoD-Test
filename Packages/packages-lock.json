@@ -129,7 +129,7 @@
         "com.raxy.utility.localization": "1.0.0",
         "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
       },
-      "hash": "30eb1985ab7bd09c78c52e432351f57df13f1446"
+      "hash": "719dc42d03ce41a7f1008e89a4d3f03a2b47fa6f"
     },
     "com.raxy.statemachine": {
       "version": "https://github.com/RobyRAX/RAXY-StateMachine.git",

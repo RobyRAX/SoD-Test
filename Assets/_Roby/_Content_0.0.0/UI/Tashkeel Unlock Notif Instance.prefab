@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2927476615692216240}
   - component: {fileID: 1095545085671965635}
   - component: {fileID: 8186774343316147983}
+  - component: {fileID: 5060655789052243273}
+  - component: {fileID: 5201120731692648629}
   m_Layer: 0
   m_Name: Tashkeel Unlock Notif Instance
   m_TagString: Untagged
@@ -138,6 +140,36 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!111 &5060655789052243273
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437287094952954586}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 0df5915f4e8b31649b9c80b6b6a47462, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 0df5915f4e8b31649b9c80b6b6a47462, type: 2}
+  - {fileID: 7400000, guid: b4648413dd150c84f8b55413140780dd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!225 &5201120731692648629
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437287094952954586}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4537055788066174172
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 311}
+  m_AnchoredPosition: {x: 0, y: 310}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3833600085240535577
@@ -212,7 +244,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
